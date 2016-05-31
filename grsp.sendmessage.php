@@ -23,6 +23,8 @@ if(!empty($grsp_name) && !empty($grsp_subject) && !empty($grsp_campaign) && !emp
 			)
 		)
 	);
+   //redirect to page to prevent form resubmission
+   echo '<script>window.location.replace("/wp-admin/admin.php?page=grsp-settings-menu");</script>';
 }
 //print_r($result);
 ?>

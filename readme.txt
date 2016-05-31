@@ -16,7 +16,7 @@ This plugin allows users to send an email through the email service GetResponse 
 == Description ==
 
 This plugin allows users to send an email through the email service GetResponse from the WordPress backend. It does so by
-scraping the html from designated page on the site, and then passing that over to GetResponse based on the options and 
+scraping the html from designated page on the site, and then passing that over to GetResponse based on the options and
 campaign that are selected.
 
 

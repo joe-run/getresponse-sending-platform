@@ -83,7 +83,6 @@ function grsp_settings_page(){
          </select>
          <input type="submit" value="Send Message" class="grsp-button button-primary" >
          </form>
-         </div>
          <?php
       }
       else{
