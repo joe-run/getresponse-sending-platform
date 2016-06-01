@@ -1,5 +1,6 @@
 === GetResponse Sending Platform ===
 Contributors: joerunweb
+Donate link: http://joe.run
 Tags: getresponse, email, newsletter
 Requires at least: 4.0.1
 Tested up to: 4.5.2
@@ -50,12 +51,30 @@ https://support.getresponse.com/faq/where-i-find-api-key
 
 
 
+== Screenshots ==
+
+1.This is a screenshot of the main plugin page. From this page, a newsletter or other email can be sent through get Response.
+
+
+
+== Upgrade Notice ==
+
+= 0.1.0 =
+Original launch version.
+
+
 == Changelog ==
 
-= 0.5 =
+= 0.1.1 =
+Project prepared for launch.
+
+= 0.1.0 =
+Error handling added.
+
+= 0.0.5 =
 Project is functional.
 
-= 0.1 =
+= 0.0.1 =
 Initial Project. Still in testing phase.
 
 
@@ -63,6 +82,5 @@ Initial Project. Still in testing phase.
 == Features Roadmap ==
 
 Planned Features:
-
 * Scheduled Sending
 * Message Send Log
