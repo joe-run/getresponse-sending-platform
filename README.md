@@ -22,7 +22,8 @@ http://apidocs.getresponse.com/en
 http://codex.wordpress.org/Main_Page
 
 ## Contributors
-Joe Barry - joe-run
+Joe Barry (joe-run)
+jbarryweb@gmail.com
 
 ## License
 GPLv2 or later

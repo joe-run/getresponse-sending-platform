@@ -42,21 +42,27 @@ function grsp_settings_page(){
    if (!empty($grsp_api_key)) {
       //Validate Key
       try{
-         $validate_key = $grsp_client->ping($grsp_api_key);
+         $grsp_validate_key = $grsp_client->ping($grsp_api_key);
       }
       catch(Exception $e){
-         $validate_key = 'False';
+         $grsp_validate_key = 'False';
       };
-      if($validate_key['ping']=='pong'){
-         //Get variables from WordPress and GetResponse
-         $campaigns = $grsp_client->get_campaigns(
+      if($grsp_validate_key['ping']=='pong'){
+         //Get variables from WordPress and GetResponse. Filter out unpublished pages.
+         $grsp_campaigns = $grsp_client->get_campaigns(
             $grsp_api_key,
                array (
                'name' => array ( 'CONTAINS' => '%' )
       		   )
       	);
-         $campaign_ids = array_keys($campaigns);
-         $page_ids = get_all_page_ids();
+         $grsp_campaign_ids = array_keys($grsp_campaigns);
+         $grsp_all_page_ids = get_all_page_ids();
+         $grsp_pub_page_ids = array();
+         foreach($grsp_all_page_ids as $grsp_all_page_id){
+            if (get_post_status($grsp_all_page_id) === 'publish'){
+               $grsp_pub_page_ids[] = $grsp_all_page_id;
+            }
+         }
          $grsp_counter = 0;
          ?>
          <hr></hr>
@@ -69,16 +75,16 @@ function grsp_settings_page(){
          <span class="grsp-send-label">Select Campaign</span>
          <select name="grsp_campaign" class="grsp-send-select grsp-campaign">
             <option value="" disabled selected>Select a campaign</option>
-            <?php foreach($campaigns as $campaign){
-               echo '<option value="'.$campaign_ids[$grsp_counter].'">'.$campaign[name].'</option>';
+            <?php foreach($grsp_campaigns as $grsp_campaign){
+               echo '<option value="'.$grsp_campaign_ids[$grsp_counter].'">'.$grsp_campaign[name].'</option>';
                $grsp_counter++;
             } ?>
          </select>
          <span class="grsp-send-label">Select Email Template</span>
          <select name="grsp_page" class="grsp-send-select grsp-page" >
             <option value="" disabled selected>Select a page</option>
-            <?php foreach($page_ids as $page_id){
-               echo '<option value="'.$page_id.'">'.get_the_title($page_id).'</option>';
+            <?php foreach($grsp_pub_page_ids as $grsp_pub_page_id){
+               echo '<option value="'.$grsp_pub_page_id.'">'.get_the_title($grsp_pub_page_id).'</option>';
             } ?>
          </select>
          <input type="submit" value="Send Message" class="grsp-button button-primary" >
