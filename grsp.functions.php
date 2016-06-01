@@ -12,6 +12,7 @@ add_action( 'admin_menu', 'grsp_settings_menu' );
 //Enqueue Admin JS and CSS
 function grsp_css_enqueue() {
    wp_enqueue_style( 'grspstyles',  plugins_url() . '/getresponse-sending-platform/grsp.css' );
+   wp_enqueue_script( 'grspscripts',  plugins_url() . '/getresponse-sending-platform/grsp.js', 'jquery', '', true );
 }
 add_action( 'admin_enqueue_scripts', 'grsp_css_enqueue' );
 
@@ -21,12 +22,25 @@ require_once('jsonRPCClient.php');
 $grsp_api_url = 'http://api2.getresponse.com';
 $grsp_client = new jsonRPCClient($grsp_api_url);
 $grsp_api_key = get_option( 'grsp_settings_apikey', '' );
+if(isset($_GET["grsptry"])){
+   $grsp_try = $_GET["grsptry"];
+   if ($grsp_try == 'pass'){
+      $grsp_message = '<p style="color:green">Your message was successfully sent.<p>';
+   }
+   elseif ($grsp_try == 'fail'){
+      $grsp_message = '<p style="color:red">An error has occured. Your message was not sent.<p>';
+   }
+   else{
+      $grsp_message = '';
+   }
+};
 
 
 //Build Sending Page
 function grsp_settings_page(){
    global $grsp_client;
    global $grsp_api_key;
+   global $grsp_message;
    ?>
    <div class="wrap">
    <h2>GetResponse Sending Platform</h2>
@@ -67,13 +81,15 @@ function grsp_settings_page(){
          ?>
          <hr></hr>
          <h2>Send an Email</h2>
-         <form method="post" action="/wp-admin/admin.php?page=grsp-settings-menu">
+         <?php echo $grsp_message; ?>
+         <form class="grsp-main-form" method="post" action="/wp-admin/admin.php?page=grsp-settings-menu">
+         <input class="grsp-test" name="grsp_test" type="hidden" value="no" required="required">
          <span class="grsp-send-label">Message Name</span>
-         <input name="grsp_name" class="grsp-send-input grsp-name">
+         <input name="grsp_name" class="grsp-send-input grsp-name" required="required">
          <span class="grsp-send-label">Message Subject</span>
-         <input name="grsp_subject" class="grsp-send-input grsp-subject">
+         <input name="grsp_subject" class="grsp-send-input grsp-subject" required="required">
          <span class="grsp-send-label">Select Campaign</span>
-         <select name="grsp_campaign" class="grsp-send-select grsp-campaign">
+         <select name="grsp_campaign" class="grsp-send-select grsp-campaign" required="required">
             <option value="" disabled selected>Select a campaign</option>
             <?php foreach($grsp_campaigns as $grsp_campaign){
                echo '<option value="'.$grsp_campaign_ids[$grsp_counter].'">'.$grsp_campaign[name].'</option>';
@@ -81,13 +97,17 @@ function grsp_settings_page(){
             } ?>
          </select>
          <span class="grsp-send-label">Select Email Template</span>
-         <select name="grsp_page" class="grsp-send-select grsp-page" >
+         <select name="grsp_page" class="grsp-send-select grsp-page" required="required">
             <option value="" disabled selected>Select a page</option>
             <?php foreach($grsp_pub_page_ids as $grsp_pub_page_id){
                echo '<option value="'.$grsp_pub_page_id.'">'.get_the_title($grsp_pub_page_id).'</option>';
             } ?>
          </select>
-         <input type="submit" value="Send Message" class="grsp-button button-primary" >
+         <span class="grsp-send-label">Test Email Address</span>
+         <span class="grsp-send-label-disclaimer">Email address must be subscribed to campaign.</span>
+         <input name="grsp_test_email" class="grsp-send-input grsp-name" required="required">
+         <input type="submit" value="Send Message" class="grsp-button grsp-main-submit-button button-primary">
+         <a href="#" class="button-primary grsp-button grsp-test-button">Send Test</a>
          </form>
          <?php
       }

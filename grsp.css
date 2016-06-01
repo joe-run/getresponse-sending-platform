@@ -1,4 +1,6 @@
 /*GetResponse Sending Platform Styles*/
 .grsp-send-input,.grsp-send-select{display: block; width: 30%; min-width: 200px;}
 .grsp-send-label{display:block; padding: 10px 0 5px 0; font-size:14px; font-weight: bold;}
+.grsp-send-label-disclaimer{display:block; padding: 0 0 5px 0; font-size:12px; font-weight:normal; font-style:italic}
 .wrap .grsp-button{margin:30px 0 0 0}
+.wrap .grsp-test-button{margin:30px 0 0 20px}
