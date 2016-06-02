@@ -4,15 +4,15 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 //Add Admin Menu Item
 function grsp_settings_menu() {
-   add_menu_page( 'GetResponse Sending', 'GetResponse Sending Platform', 'manage_options', 'grsp-settings-menu', 'grsp_settings_page','dashicons-email-alt','15.3');
+   add_menu_page( 'GetResponse Sending', 'Sending Platform for Get Response', 'manage_options', 'grsp-settings-menu', 'grsp_settings_page','dashicons-email-alt','15.3');
 }
 add_action( 'admin_menu', 'grsp_settings_menu' );
 
 
 //Enqueue Admin JS and CSS
 function grsp_css_enqueue() {
-   wp_enqueue_style( 'grspstyles',  plugins_url() . '/getresponse-sending-platform/grsp.css' );
-   wp_enqueue_script( 'grspscripts',  plugins_url() . '/getresponse-sending-platform/grsp.js', 'jquery', '', true );
+   wp_enqueue_style( 'grspstyles',  plugins_url() . '/sending-platform-for-getresponse/grsp.css' );
+   wp_enqueue_script( 'grspscripts',  plugins_url() . '/sending-platform-for-getresponse/grsp.js', 'jquery', '', true );
 }
 add_action( 'admin_enqueue_scripts', 'grsp_css_enqueue' );
 
@@ -43,7 +43,7 @@ function grsp_settings_page(){
    global $grsp_message;
    ?>
    <div class="wrap">
-   <h2>GetResponse Sending Platform</h2>
+   <h2>Sending Platform for Get Response</h2>
    <form method="post" action="options.php">
       <?php
       settings_fields("grsp_settings_section");

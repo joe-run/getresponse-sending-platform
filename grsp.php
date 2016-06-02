@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: GetResponse Sending Platform
+Plugin Name: Sending Platform for Get Response
 Description: This plugin allows users to send an email through the email service GetResponse from the WordPress backend.
 Version:     1.1
 Author:      Joe Barry
