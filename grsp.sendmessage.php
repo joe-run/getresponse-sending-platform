@@ -3,12 +3,43 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 try{
    //Establish post variables
-   $grsp_name = $_POST['grsp_name'];
-   $grsp_subject = $_POST['grsp_subject'];
-   $grsp_campaign = $_POST['grsp_campaign'];
-   $grsp_page = $_POST['grsp_page'];
-   $grsp_test = $_POST['grsp_test'];
-   $grsp_test_email = $_POST['grsp_test_email'];
+   if(isset($_POST['grsp_name'])){
+      $grsp_name = sanitize_text_field( $_POST['grsp_name'] );
+   }
+   else{
+      $grsp_name = '';
+   }
+   if(isset($_POST['grsp_subject'])){
+      $grsp_subject = sanitize_text_field( $_POST['grsp_subject'] );
+   }
+   else{
+      $grsp_subject = '';
+   }
+   if(isset($_POST['grsp_campaign'])){
+      $grsp_campaign = sanitize_text_field( $_POST['grsp_campaign'] );
+   }
+   else{
+      $grsp_campaign = '';
+   }
+   if(isset($_POST['grsp_page'])){
+      $grsp_page = sanitize_text_field( $_POST['grsp_page'] );
+   }
+   else{
+      $grsp_page = '';
+   }
+   if(isset($_POST['grsp_test'])){
+      $grsp_test = sanitize_text_field( $_POST['grsp_test'] );
+   }
+   else{
+      $grsp_test = '';
+   }
+   if(isset($_POST['grsp_test_email'])){
+      $grsp_test_email = sanitize_email($_POST['grsp_test_email']);
+   }
+   else{
+      $grsp_test_email = '';
+   }
+
    if(!empty($grsp_page)){
       $grsp_page = get_site_url().'/?p='.$grsp_page;
       $grsp_html = file_get_contents($grsp_page);
