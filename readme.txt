@@ -27,7 +27,7 @@ A typical use-case for this plugin might look something like this:
 1) You create a new page in WordPress. That page uses a custom template that is essentially an HTML email (your newsletter) with custom info
 pulled into it using WordPress loops.
 2) You install this plugin and click on the Sending Platform for Get Response menu.
-3) You enter your GetResponse info, Message Name, Message Subject, select a Campaign, and select your newly created Email Template Page.
+3) You enter your GetResponse API key, Message Name, Message Subject, select a Campaign, and select your newly created Email Template Page.
 4) You click "Send Message" to send your Email Template Page to the selected Campaign.
 
 
